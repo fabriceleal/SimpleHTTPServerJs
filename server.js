@@ -94,5 +94,7 @@ server.on('clientError', function(exception){
 	console.log('* Server.ClientError');
 });
 
+console.log('LAUNCHING ' + ADDRESS + ':' + PORT);
+
 server.listen(PORT, ADDRESS);
 
