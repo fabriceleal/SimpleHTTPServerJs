@@ -8,6 +8,7 @@ var path = require('path');
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var os = require('os');
 
 var mappings = {
 	'.html' : 'text/html',
@@ -94,7 +95,12 @@ server.on('clientError', function(exception){
 	console.log('* Server.ClientError');
 });
 
-console.log('LAUNCHING ' + ADDRESS + ':' + PORT);
 
-server.listen(PORT, ADDRESS);
+var interfaces = os.networkInterfaces();
+
+console.log('LAUNCHING ' + interfaces.lo[0].address + ':' + PORT);
+server.listen(PORT, interfaces.lo.address);
+
+console.log('LAUNCHING ' + interfaces.eth0[0].address + ':' + PORT);
+server.listen(PORT, interfaces.eth0.address);
 
