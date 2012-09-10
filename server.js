@@ -20,13 +20,13 @@ server.on('request', function(request, response){
 	console.log('* Server.Request');
 
 	request.on('data', function(chunk){
-
+		// TODO future ...
 	});
 	request.on('end', function(){
-
+		// TODO future ...
 	});
 	request.on('close', function(){
-
+		// TODO future ...
 	});
 
 	console.log('** request.method: ' + request.method);
