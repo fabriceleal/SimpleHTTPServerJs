@@ -97,10 +97,17 @@ server.on('clientError', function(exception){
 
 
 var interfaces = os.networkInterfaces();
+//console.log(interfaces);
 
-console.log('LAUNCHING ' + interfaces.lo[0].address + ':' + PORT);
-server.listen(PORT, interfaces.lo.address);
+// This is very ugly, but it suits my needs ...
+if(os.type() === 'Windows_NT') {
+	console.log('LAUNCHING 127.0.0.1:' + PORT);
+	server.listen(PORT, '127.0.0.1');
+} else {
+	console.log('LAUNCHING ' + interfaces.lo[0].address + ':' + PORT);
+	server.listen(PORT, interfaces.lo.address);
 
-console.log('LAUNCHING ' + interfaces.eth0[0].address + ':' + PORT);
-server.listen(PORT, interfaces.eth0.address);
+	console.log('LAUNCHING ' + interfaces.eth0[0].address + ':' + PORT);
+	server.listen(PORT, interfaces.eth0.address);
+}
 
